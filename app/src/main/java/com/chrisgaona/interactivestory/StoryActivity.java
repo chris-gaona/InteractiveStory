@@ -16,6 +16,9 @@ public class StoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
+        if (name == null || name.isEmpty()) {
+            name = "Friend";
+        }
         Log.d(TAG, name);
     }
 }
