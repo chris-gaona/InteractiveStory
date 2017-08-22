@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.chrisgaona.interactivestory.R;
+import com.chrisgaona.interactivestory.model.Page;
 
 public class StoryActivity extends AppCompatActivity {
 
