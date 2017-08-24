@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nameField.setText("");
+    }
+
     private void startStory(String name) {
         // create new intent for StoryActivity
         Intent intent = new Intent(this, StoryActivity.class);
