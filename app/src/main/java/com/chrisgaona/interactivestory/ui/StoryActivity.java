@@ -15,6 +15,8 @@ import com.chrisgaona.interactivestory.R;
 import com.chrisgaona.interactivestory.model.Page;
 import com.chrisgaona.interactivestory.model.Story;
 
+import java.util.Stack;
+
 public class StoryActivity extends AppCompatActivity {
 
     public static final String TAG = StoryActivity.class.getSimpleName();
@@ -25,6 +27,7 @@ public class StoryActivity extends AppCompatActivity {
     private Button choice1Button;
     private Button choice2Button;
     private String name;
+    private Stack<Integer> pageStack = new Stack<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class StoryActivity extends AppCompatActivity {
     }
 
     private void loadPage(int pageNumber) {
+        pageStack.push(pageNumber);
+
         final Page page = mStory.getPage(pageNumber);
 
         Drawable image = ContextCompat.getDrawable(this, page.getImageId());
@@ -104,5 +109,22 @@ public class StoryActivity extends AppCompatActivity {
                 loadPage(nextPage);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // walk through of the below:
+        // on page 1
+        // but started on page 0
+
+        // this will pop page 1 from our stack leaving page 0...not empty
+        pageStack.pop();
+
+        if (pageStack.isEmpty()) {
+            super.onBackPressed();
+        } else {
+            // this second pop will remove page 0...reloads page 0
+            loadPage(pageStack.pop());
+        }
     }
 }
